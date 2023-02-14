@@ -5,14 +5,12 @@ import javax.persistence.*;
 /**
  * Created by jt on 6/13/17.
  */
+/*
+annotate the class as an Entity. So this is now creating this class as an Entity
+ */
 
-    /*
-    So I'm going to come down
 
-to this field here and add in the one-to-one mapping. So that is going to
 
-create the relationship for the one-to-one mapping.
-     */
 @Entity
 public class Recipe {
 
