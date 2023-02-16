@@ -8,17 +8,25 @@ import java.math.BigDecimal;
  */
 @Entity
 public class Ingredient {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String description;
     private BigDecimal amount;
 
-    //private UnitOfMeasure uom;
+    @OneToOne
+    private UnitOfMeasure uom;
 
-    @ManyToOne
+    /*
+       FetchType is EAGER by default.
+       This is just a way to show other developers the intent
+       Tells Hibernate I want you to get it every time.
+     */
+    @ManyToOne(fetch=FetchType.EAGER)
     private Recipe recipe;
+
+
 
     public Long getId() {
         return id;
@@ -51,4 +59,6 @@ public class Ingredient {
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
+
+
 }
