@@ -15,7 +15,7 @@ public class Ingredient {
     private String description;
     private BigDecimal amount;
 
-    @OneToOne
+    @OneToOne(fetch=FetchType.EAGER)
     private UnitOfMeasure uom;
 
     /*
@@ -23,7 +23,7 @@ public class Ingredient {
        This is just a way to show other developers the intent
        Tells Hibernate I want you to get it every time.
      */
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     private Recipe recipe;
 
 
