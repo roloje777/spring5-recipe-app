@@ -89,6 +89,10 @@ the database.
     @Lob
     private Byte[] image;
 
+
+    @Enumerated(value=EnumType.ORDINAL)
+    private Difficulty difficulty;
+
     /*
         So I'm going to come down
 
@@ -190,4 +194,11 @@ to do cascade all.
         this.ingredients = ingredients;
     }
 
+    public Difficulty getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(Difficulty difficulty) {
+        this.difficulty = difficulty;
+    }
 }
