@@ -55,6 +55,9 @@ several other databases do.
     private Integer servings;
     private String source;
     private String url;
+
+    // so it allows large strings
+    @Lob
     private String directions;
     //todo add
     //private Difficulty difficulty;
