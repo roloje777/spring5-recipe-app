@@ -54,7 +54,7 @@ public class DataLoader implements CommandLineRunner {
         perfectGuacamole.setSource("none");
 
 
-
+  /*
       // add ingredients
         Set<Ingredient> ingredients = new HashSet<>();
         addIngredient(ingredients,0.25,"kosher salt, plus more to taste","Teaspoon",perfectGuacamole);
@@ -68,6 +68,16 @@ public class DataLoader implements CommandLineRunner {
 
         perfectGuacamole.setIngredients(ingredients);// add ingredients to recipe
 
+*/
+        // refactored to make use the addIngrients untlity method
+      addIngredient(0.25,"kosher salt, plus more to taste","Teaspoon",perfectGuacamole);
+      addIngredient(1,"fresh lime or lemon juice","Tablespoon",perfectGuacamole);
+      addIngredient( 1,"minced red onion or thinly sliced green onion","Tablespoon",perfectGuacamole);
+      addIngredient(2,"serrano (or jalapeño) chilis, stems and seeds removed, minced","Each",perfectGuacamole);
+        addIngredient(2,"cilantro (leaves and tender stems), finely chopped","Tablespoon",perfectGuacamole);
+        addIngredient(1,"freshly ground black pepper","Pinch",perfectGuacamole);
+        addIngredient(0.5,"Red radish or jicama slices for garnish (optional)","Each",perfectGuacamole);
+        addIngredient(1,"Tortila chips","Each",perfectGuacamole);
 
 
 
@@ -86,7 +96,12 @@ public class DataLoader implements CommandLineRunner {
                               "\n" +
                               "Note: Chilling tomatoes hurts their flavor. So, if you want to add chopped tomato to your\n" +
                               "guacamole, add it just before serving.");
-                     notes.setRecipe(perfectGuacamole);
+
+                      /*
+                         setNotes no longer needed to be called
+
+                       */
+                    // notes.setRecipe(perfectGuacamole);
                       perfectGuacamole.setNotes(notes);
 
        //  save to repository
@@ -118,25 +133,29 @@ public class DataLoader implements CommandLineRunner {
 
 
         // add ingredients
-        ingredients = new HashSet<>();
-        addIngredient(ingredients,2,"ancho chili powder","Tablespoon",chicken);
-        addIngredient(ingredients,1,"dried oregano","Teaspoon",chicken);
-        addIngredient(ingredients,1,"dried cumin","Teaspoon",chicken);
-        addIngredient(ingredients,1,"sugar","Teaspoon",chicken);
-        addIngredient(ingredients,1,"skosher salt","Teaspoon",chicken);
-        addIngredient(ingredients,1,"garlic, finely chopped","Clove",chicken);
-        addIngredient(ingredients,3,"finely grated orange zest","Tablespoon",chicken);
-        addIngredient(ingredients,3,"fresh-squeezed orange juice","Tablespoon",chicken);
-        addIngredient(ingredients,3,"Olive oil","Tablespoon",chicken);
-        addIngredient(ingredients,1.25,"4 to 6 skinless, boneless chicken thighs","Pound",chicken);
-        chicken.setIngredients(ingredients);
+        //ingredients = new HashSet<>();
+        addIngredient(2,"ancho chili powder","Tablespoon",chicken);
+        addIngredient(1,"dried oregano","Teaspoon",chicken);
+        addIngredient(1,"dried cumin","Teaspoon",chicken);
+        addIngredient(1,"sugar","Teaspoon",chicken);
+        addIngredient(1,"skosher salt","Teaspoon",chicken);
+        addIngredient(1,"garlic, finely chopped","Clove",chicken);
+        addIngredient(3,"finely grated orange zest","Tablespoon",chicken);
+        addIngredient(3,"fresh-squeezed orange juice","Tablespoon",chicken);
+        addIngredient(3,"Olive oil","Tablespoon",chicken);
+        addIngredient(1.25,"4 to 6 skinless, boneless chicken thighs","Pound",chicken);
+
 
         chicken.setDirections("Prepare either a gas or charcoal grill for medium-high, direct heat.");
 
         //set Notes
         notes = new Notes();
         notes.setRecipeNotes("The ancho chiles I use in the marinade are named for their wide shape.");
-        notes.setRecipe(chicken);
+
+        /*
+           notes no longer needed to be called
+         */
+       // notes.setRecipe(chicken);
         chicken.setNotes(notes);
 
         //  save to repository and read back object
@@ -172,17 +191,19 @@ public class DataLoader implements CommandLineRunner {
                "... saved ...");
     }
 
-    private void addIngredient(Set<Ingredient> ingredients, double d, String description, String uom, Recipe recipe){
+
+    private void addIngredient(double d, String description, String uom, Recipe recipe){
         Ingredient ingredient = new Ingredient();
         ingredient.setAmount(new BigDecimal(d));
         ingredient.setDescription(description);
         //ingredient.setUom(unitOfMeasureRepository.findByDescription(uom).get());
         unitOfMeasureRepository.findByDescription(uom).ifPresent(u -> ingredient.setUom(u));
-        ingredient.setRecipe(recipe);
-        ingredients.add(ingredient);
+        recipe.addIngredient(ingredient); // calls utilty method
 
 
     }
+
+
 
 
 }

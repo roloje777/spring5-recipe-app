@@ -1,6 +1,7 @@
 package guru.springframework.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -88,7 +89,7 @@ the database.
  */
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>(); // added so that I don't have to create object outside class
     @Lob
     private Byte[] image;
 
@@ -194,8 +195,22 @@ to do cascade all.
     }
 
     public void setNotes(Notes notes) {
+
         this.notes = notes;
+        notes.setRecipe(this); // added for bi-directional update from one location
     }
+
+    /*
+       Utility method added so One can add ingredients from the recipe jojo
+       instead in the ingriendient pojo
+     */
+    public Recipe addIngredient(Ingredient ingredient){
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
+    }
+
+
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }
