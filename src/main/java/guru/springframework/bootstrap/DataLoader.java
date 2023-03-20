@@ -4,6 +4,7 @@ import guru.springframework.domain.*;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.RecipeRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import java.util.Set;
 /*
   Initializes database with data at startup
  */
+@Slf4j
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -32,6 +34,7 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        log.debug("Loading bootstap data");
         // Perfect Guacamole
       //  Recipe perfectGuacamole = recipeRepository.save(new Recipe());
        Recipe perfectGuacamole = new Recipe();
