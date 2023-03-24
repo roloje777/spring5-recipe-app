@@ -7,6 +7,7 @@ import guru.springframework.repositories.UnitOfMeasureRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -33,6 +34,7 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         log.debug("Loading bootstap data");
         // Perfect Guacamole
@@ -50,7 +52,7 @@ public class DataLoader implements CommandLineRunner {
         // add categories
         Set<Category> categories = new HashSet<>();
         //categories.add(categoryRepository.findByDescription("Mexican").get());
-       addCategory(perfectGuacamole, categories, "Mexican");
+//       addCategory(perfectGuacamole, categories, "Mexican");
         addCategory(perfectGuacamole, categories, "Fast Food");
 
         perfectGuacamole.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
@@ -166,10 +168,14 @@ public class DataLoader implements CommandLineRunner {
         //display results
         display(chicken);
 
+        /* debugiong code */
+
+
 
     }
 
     private void addCategory(Recipe recipe, Set<Category> categories, String description) {
+
         categoryRepository.findByDescription(description).ifPresent(c -> categories.add(c));
         recipe.setCategories(categories);
     }

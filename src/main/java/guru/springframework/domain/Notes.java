@@ -1,6 +1,8 @@
 package guru.springframework.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -15,6 +17,9 @@ class as an Entity. So this is now creating this class as an Entity
  */
 
     @Data
+    /* stop circular reference error from bidirectional relationship */
+    @EqualsAndHashCode(exclude = {"recipe"})
+
 @Entity
 public class Notes {
 

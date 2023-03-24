@@ -1,6 +1,8 @@
 package guru.springframework.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -21,10 +23,13 @@ annotate the class as an Entity. So this is now creating this class as an Entity
 
 
 @Data
+/* stop circular reference error from bidirectional relationship */
+@EqualsAndHashCode(exclude = {"notes", "ingredient"})
+
 @Entity
 public class Recipe {
 
-    /*
+    /*c
  give it an ID value. So under the covers, objects are
 
 going to get their own ID value within the JVM but we're persisting it down to
