@@ -24,6 +24,7 @@ class RecipeServiceImplTest {
     //initialize the mocks
     @BeforeEach
     public void setUp() throws Exception {
+        // here we initialize the testy with the mock repository - see @Mock above
         MockitoAnnotations.initMocks(this);
 
         recipeService = new RecipeServiceImpl(recipeRepository);
@@ -33,13 +34,30 @@ class RecipeServiceImplTest {
     void getRecipes() throws Exception{
         Recipe recipe = new Recipe();
         HashSet recipesData = new HashSet();
+
+        // should fail as the mock should return an empty set
+        //assertEquals(recipesData.size(), 0); // passes
+       // assertEquals(recipesData.size(), 1); // failsc
+
         recipesData.add(recipe);
 
         when(recipeRepository.findAll()).thenReturn(recipesData);
 
         List<Recipe> recipes = recipeService.getRecipes();
 
-        assertEquals(recipes.size(), 1);
+        /*
+. Just to recap what's going on there. We
+
+created on line 35 to 46 we set up the recipe data and then on 42 this is where
+
+we're telling Mockito. We're saying when when the recipeServic.getRecipes
+
+is called then return back recipesData. So we want our data
+
+returned to the test.
+
+         */
+
         /*
         what we're saying here verify that the recipeRepository times once and
 
@@ -50,21 +68,14 @@ class RecipeServiceImplTest {
     gonna verify that the recipeRepository was called like that.
 
          */
-       verify(recipeRepository, times(1)).findAll();
+       verify(recipeRepository, times(2)).findAll();
 
         /*
-        We can see that we're still passing now. If I were to change this to say three,
 
-        we'll see a failure.
+        Here we use mockito to verify if the findAll(0 was called only once..
+        If we changed tw 2 the verify should fail
 
-        Now you can see that down in the window that we're saying wanted three
-
-    times but only one was called one time. So it's a good way to verify that
-
-    your interactions within the class are happening as expected.
-
-      verify(recipeRepository, times(3)).findAll();
-         */
+        * */
 
 
 
