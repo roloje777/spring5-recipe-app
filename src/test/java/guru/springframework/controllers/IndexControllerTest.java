@@ -1,15 +1,21 @@
 package guru.springframework.controllers;
 
+import guru.springframework.domain.Recipe;
 import guru.springframework.repositories.CategoryRepository;
 import guru.springframework.repositories.UnitOfMeasureRepository;
 import guru.springframework.service.RecipeService;
 import guru.springframework.service.RecipeServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.mockito.Mockito.*; // needed for the verify method
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,10 +41,29 @@ class IndexControllerTest {
 
     @Test
     public void getIndexPage(){
+
+        List<Recipe> recipes = new ArrayList<>();
+        recipes.add(new Recipe());
+
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        recipes.add(recipe);
+
+        when(recipeService.getRecipes()).thenReturn(recipes);
+
+        ArgumentCaptor<List<Recipe>> argumentCaptor = ArgumentCaptor.forClass(List.class);
+
+
+        //when
         String viewName = controller.getIndexPage(model);
 
+        //then
         assertEquals("index", viewName);
         verify(recipeService, times(1)).getRecipes();
-        verify(model, times(1)).addAttribute(eq("recipes"), anyList());
+        //verify(model, times(1)).addAttribute(eq("recipes"), anyList());
+        verify(model, times(1)).addAttribute(eq("recipes"), argumentCaptor.capture());
+        List<Recipe> listInController = argumentCaptor.getValue();
+        assertEquals(2,listInController.size());
     }
 }
