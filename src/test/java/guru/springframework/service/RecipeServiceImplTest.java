@@ -68,7 +68,7 @@ returned to the test.
     gonna verify that the recipeRepository was called like that.
 
          */
-       verify(recipeRepository, times(2)).findAll();
+       verify(recipeRepository, times(1)).findAll();
 
         /*
 
