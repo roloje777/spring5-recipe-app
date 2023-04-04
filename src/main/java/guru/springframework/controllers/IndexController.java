@@ -29,12 +29,17 @@ public class IndexController {
 
     private RecipeService recipeService;
 
+    /*
     public IndexController(CategoryRepository categoryRepository,
                            UnitOfMeasureRepository unitOfMeasureRepository,
                            RecipeServiceImpl recipeService
                            ) {
         this.categoryRepository = categoryRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
+        this.recipeService = recipeService;
+    } */
+
+    public IndexController(RecipeService recipeService){
         this.recipeService = recipeService;
     }
 
@@ -45,13 +50,13 @@ public class IndexController {
     @RequestMapping({"","/","/index"})
     public String getIndexPage(Model model){
         log.debug("Getting index page");
-        Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
-        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
+       // Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
+      //  Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
 
-        System.out.println("Cat Id is: " + categoryOptional.get().getId());
-        System.out.println("UOM ID is: " + unitOfMeasureOptional.get().getId());
-        System.out.print("List of recipe ids ");
-       recipeService.getRecipes().forEach(r -> System.out.print(r.getId() + ","));
+      //  System.out.println("Cat Id is: " + categoryOptional.get().getId());
+      //  System.out.println("UOM ID is: " + unitOfMeasureOptional.get().getId());
+      //  System.out.print("List of recipe ids ");
+//       recipeService.getRecipes().forEach(r -> System.out.print(r.getId() + ","));
         model.addAttribute("recipes",recipeService.getRecipes());
 
         return "index";
