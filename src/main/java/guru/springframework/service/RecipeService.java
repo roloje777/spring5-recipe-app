@@ -7,4 +7,5 @@ import java.util.List;
 public interface RecipeService {
 
     public List<Recipe> getRecipes();
+    Recipe findById(Long l);
 }

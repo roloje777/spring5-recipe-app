@@ -42,8 +42,7 @@ public class DataLoader implements CommandLineRunner {
        Recipe perfectGuacamole = new Recipe();
         System.out.println(perfectGuacamole.getId());
 
-        perfectGuacamole.setDescription("The best guacamole keeps it simple: just ripe avocados and a handful of flavorful mix-ins.\n" +
-                "Serve it as a dip at your next party or spoon it on top of tacos for an easy dinner upgrade.");
+        perfectGuacamole.setDescription("Perfect Guacamole " );
         perfectGuacamole.setPrepTime(10);
         perfectGuacamole.setCookTime(0);
         perfectGuacamole.setServings(4);
@@ -122,7 +121,7 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println(chicken.getId());
 
-        chicken.setDescription("Spicy Grilled Chicken Tacos\nSpicy grilled chicken tacos! Quick marinade, then grill.\n Ready in about 30 minutes. Great for a quick weeknight dinner, backyard cookouts, and tailgate parties.\n");
+        chicken.setDescription("Spicy Grilled Chicken Tacos");
         chicken.setPrepTime(20);
         chicken.setCookTime(10);
         chicken.setServings(5);

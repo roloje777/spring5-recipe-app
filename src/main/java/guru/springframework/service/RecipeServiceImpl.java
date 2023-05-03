@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /*
 • @Log - Creates a Java util logger - Java util loggers are awful
@@ -26,5 +27,17 @@ public class RecipeServiceImpl implements RecipeService {
         List<Recipe> list = new ArrayList<>();
         recipeRepository.findAll().forEach(list::add);
         return list;
+    }
+
+    @Override
+    public Recipe findById(Long l) {
+
+        Optional<Recipe> recipeOptional = recipeRepository.findById(l);
+
+        if (!recipeOptional.isPresent()) {
+            throw new RuntimeException("Recipe Not Found!");
+        }
+
+        return recipeOptional.get();
     }
 }
