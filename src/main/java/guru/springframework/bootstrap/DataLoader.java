@@ -53,6 +53,7 @@ public class DataLoader implements CommandLineRunner {
         //categories.add(categoryRepository.findByDescription("Mexican").get());
 //       addCategory(perfectGuacamole, categories, "Mexican");
         addCategory(perfectGuacamole, categories, "Fast Food");
+        addCategory(perfectGuacamole, categories, "Mexican");
 
         perfectGuacamole.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
         perfectGuacamole.setSource("none");
