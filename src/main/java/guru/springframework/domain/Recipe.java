@@ -128,14 +128,17 @@ to do cascade all.
     @JoinTable(name = "recipe_category",
             joinColumns = @JoinColumn(name = "recipe_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories;
+    private Set<Category> categories = new HashSet<>();
 
 
 
     public void setNotes(Notes notes) {
+        // don't add null notes to recipe
+      if(notes != null) {
+          this.notes = notes;
+          notes.setRecipe(this); // added for bi-directional update from one location
 
-        this.notes = notes;
-        notes.setRecipe(this); // added for bi-directional update from one location
+      }
     }
 
     /*
