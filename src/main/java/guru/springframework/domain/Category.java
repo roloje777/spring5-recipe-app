@@ -1,8 +1,6 @@
 package guru.springframework.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,7 +13,8 @@ import java.util.Set;
   @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructok
   So these are creates at compile time by Project Lombol
  */
-@Data
+@Getter
+@Setter
 /* stop circular reference error from bidirectional relationship */
 @EqualsAndHashCode(exclude = {"recipes"})
 
