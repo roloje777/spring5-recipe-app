@@ -2,7 +2,14 @@ package guru.springframework.domain;
 
 import lombok.*;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Lob;
+import javax.persistence.OneToOne;
+
 import javax.persistence.*;
+
+
 
 /**
  * Created by jt on 6/13/17.
